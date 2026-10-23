@@ -1,0 +1,71 @@
+{
+    "name" : "信任的进化",
+    "appid" : "",
+    "description" : "博弈论互动科普指南：为什么我们不再互相信任？又该如何重建信任？",
+    "versionName" : "1.0.0",
+    "versionCode" : "100",
+    "transformPx" : false,
+    "app-plus" : {
+        "usingComponents" : true,
+        "nvueStyleCompiler" : "uni-app",
+        "compilerVersion" : 3,
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 0
+        },
+        "modules" : {},
+        "distribute" : {
+            "android" : {
+                "permissions" : []
+            },
+            "ios" : {},
+            "sdkConfigs" : {}
+        }
+    },
+    "quickapp" : {},
+    "mp-weixin" : {
+      "projectname": "trust-client",
+      "appid" : "wx75748b114e347fa6",
+      "libVersion": "3.11.3",
+      "setting" : {
+        "urlCheck" : false,
+        "checkSiteMap": true,
+        "enhance": true,
+        "es6" : true,
+        "minified": true,
+        "uglifyFileName": true,
+        "ignoreUploadUnusedFiles": true,
+        "minifyWXML": true,
+        "minifyWXSS": true,
+        "compileWorklet": false,
+        "bigPackageSizeSupport": true
+      },
+      "scopedSlotsCompiler": "legacy",
+      "styleIsolation" : "apply-shared",
+      "usingComponents" : true,
+      "lazyCodeLoading" : "requiredComponents",
+      "optimization" : {
+        "subPackages" : true
+      },
+      "uniStatistics" : {
+        "enable" : false
+      },
+      "darkmode" : false,
+      "nativeTags": ["span"]
+    },
+    "mp-alipay" : {
+        "usingComponents" : true
+    },
+    "mp-baidu" : {
+        "usingComponents" : true
+    },
+    "mp-toutiao" : {
+        "usingComponents" : true
+    },
+    "uniStatistics": {
+        "enable": false
+    },
+    "vueVersion" : "3"
+}

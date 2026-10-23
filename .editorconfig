@@ -1,0 +1,17 @@
+# http://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+# 建议开启：确保文件末尾有且只有一个换行符，防止 git diff 混乱
+insert_final_newline = true
+# 建议开启：自动删除行尾空格，减少字节匹配干扰
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
