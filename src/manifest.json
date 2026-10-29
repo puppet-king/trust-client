@@ -2,7 +2,7 @@
     "name" : "信任的进化",
     "appid" : "",
     "description" : "博弈论互动科普指南：为什么我们不再互相信任？又该如何重建信任？",
-    "versionName" : "0.0.0",
+    "versionName" : "0.1.0",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
