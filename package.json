@@ -37,7 +37,8 @@
     "shot": "node scripts/miniprogram-check.cjs",
     "check:ui": "node scripts/miniprogram-check.cjs",
     "check:ui:all": "node scripts/miniprogram-check.cjs --all",
-    "version": "node scripts/sync-version.mjs && git add src/configs/constant.ts && git push origin master"
+    "version": "node scripts/sync-version.js && git add src/configs/constant.ts src/manifest.json",
+    "postversion": "git push origin master --follow-tags"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-5020420260813003",
