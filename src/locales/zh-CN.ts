@@ -88,7 +88,9 @@ export const WORDS_ZH: Record<string, string> = {
   character_tft:
     '<b>复读机：</b>' + '你好呀！第一轮我先选<b>合作</b>，之后每一轮，你上一轮选了什么我就原样照抄什么。喵~',
   character_all_d: '<b>万年老油条：</b>' + '<i>弱肉强食，蠢货才合作！</i>（永远选择欺骗）',
-  character_all_c: '<b>小粉红：</b>' + '让我们做一辈子的好朋友吧！&lt;3（永远选择合作）',
+  character_all_c:
+    '<b>小粉红：</b>' +
+    '让我们做一辈子的好朋友吧！<img src="/static/ui/love.png" style="width:16px;height:16px;vertical-align:-2px;margin:0 2px" />（永远选择合作）',
   character_grudge:
     '<b>黑帮老铁：</b>' +
     '听好了兄弟。咱一开始会<b>合作</b>，也会一直合作下去；但只要你敢坑我哪怕一次，<b>我就跟你死磕到底、欺骗到天荒地老！</b>',
@@ -381,11 +383,11 @@ export const WORDS_ZH: Record<string, string> = {
     '所以，尽你所能去创造让信任得以生长的条件吧。' +
     '建立长久的关系。寻找双赢的解法。清晰坦诚地沟通。' +
     '也许到那时，我们就能停止互相攻击，走出各自的战壕，穿过无人区相聚在一起……',
-  outro_1_btn: '共同学会……',
+  outro_1_btn: '……共同学会 &rarr;',
 
   outro_2: '……“自己活，也让别人活”。',
   outro_2_credits: '《对峙战壕间的圣诞休战》，AC Michael 绘，刊载于 1915 年 1 月 9 日《伦敦新闻画报》。',
-  outro_2_btn: '&lt;3',
+  outro_2_btn: '❤',
 
   // CREDITS
   credits:
@@ -398,7 +400,7 @@ export const WORDS_ZH: Record<string, string> = {
     '<span class="big">《合作的进化》(THE EVOLUTION OF COOPERATION)</span><br>' +
     '跨越学科揭示互惠合作如何在自利个体间产生与演化' +
     '<span class="divider"></span>' +
-    '愿我们在每一次重复博弈中，都能选择理性与宽容的善意 &lt;3' +
+    '愿我们在每一次重复博弈中，都能选择理性与宽容的善意 ❤' +
     '</div>',
 
   // THE PLAYERS
@@ -470,6 +472,22 @@ export const WORDS_ZH: Record<string, string> = {
   chapter_sandbox: '7. 沙盒模式',
   chapter_conclusion: '8. 总结与启示',
   chapter_credits: '9. 致谢名单',
+
+  // SHARING & CREDITS
+  label_replay: '重新体验 ↻',
+  label_share_friend: '分享给好友 ♥',
+  label_share_short: '分享',
+  share_default_title: '《信任的进化》：为什么人们越来越难彼此信任？博弈论互动指南',
+  share_score_title:
+    '我在《信任的进化》博弈挑战中拿到了 [SCORE] 分（满分49），你能看穿所有对手的套路吗？',
+  share_tournament_title:
+    '复读机、万年老油条、小粉红、福尔摩斯……谁才是博弈演化的最终赢家？',
+  share_outro_title:
+    '《信任的进化》：短期内游戏塑造玩家，长期内是我们塑造了游戏 ♥',
+  share_timeline_default:
+    '《信任的进化》博弈论互动指南：为什么朋友变成敌人，敌人又能变成朋友？',
+  share_timeline_score:
+    '我在《信任的进化》博弈挑战中得了 [SCORE] 分！一起看懂人与人之间信任的秘密',
 }
 
 export function t(key: string, replacements?: Record<string, string | number>): string {
@@ -485,4 +503,42 @@ export function t(key: string, replacements?: Record<string, string | number>): 
 export function getCharacterBadgeHtml(strategy: StrategyId): string {
   const name = WORDS_ZH[`label_${strategy}`] || strategy
   return `<span class="${strategy}">${name}</span>`
+}
+
+export function getShareAppMessageData(chapter: string, iteratedTotalScore: number) {
+  let title = t('share_default_title')
+  if (chapter === 'iterated' && iteratedTotalScore > 0) {
+    title = t('share_score_title', { SCORE: iteratedTotalScore })
+  } else if (
+    chapter === 'tournament' ||
+    chapter === 'evolution' ||
+    chapter === 'distrust' ||
+    chapter === 'noise'
+  ) {
+    title = t('share_tournament_title')
+  } else if (chapter === 'sandbox' || chapter === 'conclusion' || chapter === 'credits') {
+    title =
+      iteratedTotalScore > 0
+        ? t('share_score_title', { SCORE: iteratedTotalScore })
+        : t('share_outro_title')
+  }
+
+  return {
+    title,
+    path: '/pages/index/index',
+    imageUrl: '/static/ui/share_cover.jpg',
+  }
+}
+
+export function getShareTimelineData(iteratedTotalScore: number) {
+  const title =
+    iteratedTotalScore > 0
+      ? t('share_timeline_score', { SCORE: iteratedTotalScore })
+      : t('share_timeline_default')
+
+  return {
+    title,
+    query: '',
+    imageUrl: '/static/ui/share_cover.jpg',
+  }
 }

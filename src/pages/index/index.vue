@@ -228,7 +228,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import StageLayout from '@/components/trust/StageLayout.vue'
 import SplashRing from '@/components/trust/SplashRing.vue'
 import IteratedMachine from '@/components/trust/IteratedMachine.vue'
@@ -236,7 +236,11 @@ import TrustButton from '@/components/trust/TrustButton.vue'
 import CharacterCard from '@/components/trust/CharacterCard.vue'
 import type { MoveType, StrategyId } from '@/core/pd'
 import { soundManager } from '@/core/sound'
-import { t } from '@/locales/zh-CN'
+import {
+  getShareAppMessageData,
+  getShareTimelineData,
+  t,
+} from '@/locales/zh-CN'
 import { type ChapterId, useGameStore } from '@/stores/game'
 
 defineOptions({
@@ -422,5 +426,13 @@ onLoad((query?: Record<string, string>) => {
       }
     }
   }
+})
+
+onShareAppMessage(() => {
+  return getShareAppMessageData(gameStore.currentChapter, gameStore.iteratedTotalScore)
+})
+
+onShareTimeline(() => {
+  return getShareTimelineData(gameStore.iteratedTotalScore)
 })
 </script>

@@ -34,6 +34,9 @@
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "type-check": "vue-tsc --noEmit",
+    "shot": "node scripts/miniprogram-check.cjs",
+    "check:ui": "node scripts/miniprogram-check.cjs",
+    "check:ui:all": "node scripts/miniprogram-check.cjs --all",
     "version": "node scripts/sync-version.mjs && git add src/configs/constant.ts && git push origin master"
   },
   "dependencies": {

@@ -46,8 +46,10 @@ page {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: #222222;
-  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'MiSans', 'HarmonyOS Sans', 'Microsoft YaHei', sans-serif;
+  background-color: #ffffff;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'MiSans', 'HarmonyOS Sans', 'Microsoft YaHei',
+    sans-serif;
 }
 
 /* 核心布局与主题兜底样式，确保小程序任何渲染环境下 100% 生效 */
@@ -140,35 +142,35 @@ page {
 }
 
 .tft {
-  color: #4089DD;
+  color: #4089dd;
   font-weight: 600;
 }
 .all_d {
-  color: #52537F;
+  color: #52537f;
   font-weight: 600;
 }
 .all_c {
-  color: #FF75FF;
+  color: #ff75ff;
   font-weight: 600;
 }
 .grudge {
-  color: #D4AF00;
+  color: #d4af00;
   font-weight: 600;
 }
 .prober {
-  color: #F6B24C;
+  color: #f6b24c;
   font-weight: 600;
 }
 .tf2t {
-  color: #88A8CE;
+  color: #88a8ce;
   font-weight: 600;
 }
 .pavlov {
-  color: #86C448;
+  color: #86c448;
   font-weight: 600;
 }
 .random {
-  color: #FF5E5E;
+  color: #ff5e5e;
   font-weight: 600;
 }
 

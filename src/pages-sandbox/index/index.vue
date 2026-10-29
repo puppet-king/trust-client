@@ -188,43 +188,113 @@
 
     <!-- ==================== 第 9 章：致谢名单 (credits) ==================== -->
     <template v-else-if="gameStore.currentChapter === 'credits'">
-      <view class="absolute inset-0 flex flex-col items-center justify-center text-center px-12">
-        <view class="text-neutral-400" style="font-size: 17px; line-height: 1.6"> 原著设计与开发 </view>
-        <view class="text-white font-bold mt-1" style="font-size: 36px; letter-spacing: 2px"> NICKY CASE </view>
-        <view class="text-accent mt-1" style="font-size: 15px">
+      <!-- 顶部与中部致谢内容区 (高度限制在 380px 内，与底部按钮保持充足间距) -->
+      <view
+        class="absolute text-center animate-fade-in"
+        style="position: absolute; left: 60px; top: 24px; width: 840px; height: 375px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center"
+      >
+        <!-- 第一组：原著致敬 -->
+        <view style="font-size: 15px; line-height: 1.5; color: #999999">
+          原著设计与开发
+        </view>
+        <view
+          style="font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: 2px; color: #FFFFFF; margin-top: 2px"
+        >
+          NICKY CASE
+        </view>
+        <view style="font-size: 14px; line-height: 1.4; color: #DD4040; margin-top: 4px">
           《The Evolution of Trust》(2017) · CC0 公共领域开源作品
         </view>
 
-        <view class="h-4" />
+        <!-- 分割线 -->
+        <view
+          style="width: 60px; height: 1px; background-color: rgba(255,255,255,0.15); margin: 18px 0"
+        />
 
-        <view class="text-neutral-400" style="font-size: 17px; line-height: 1.6">
+        <!-- 第二组：理论著作致敬 -->
+        <view style="font-size: 15px; line-height: 1.5; color: #999999">
           理论基础源自罗伯特·阿克塞尔罗德 (Robert Axelrod) 1984 年经典著作
         </view>
-        <view class="text-white font-bold mt-1" style="font-size: 30px">
+        <view
+          style="font-size: 27px; line-height: 1.25; font-weight: 700; color: #FFFFFF; margin-top: 4px"
+        >
           《合作的进化》(THE EVOLUTION OF COOPERATION)
         </view>
 
-        <view class="h-4" />
-        <view class="text-primary font-bold mt-1" style="font-size: 24px"> 《信任的进化》互动科普小程序版 </view>
-        <view class="text-neutral-400 mt-1" style="font-size: 14px">
-          愿我们在每一次重复博弈中，都能选择有原则、有宽容的善意 ♥
+        <!-- 分割线 -->
+        <view
+          style="width: 60px; height: 1px; background-color: rgba(255,255,255,0.15); margin: 18px 0"
+        />
+
+        <!-- 第三组：八大角色帽子列阵与本土化寄语 -->
+        <view
+          style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin-bottom: 10px"
+        >
+          <view
+            v-for="frameIdx in [0, 1, 2, 3, 4, 5, 6, 7]"
+            :key="frameIdx"
+            style="width: 28px; height: 28px; margin: 0 5px"
+          >
+            <SpriteImage
+              src="/static/ui/sandbox_hats.png"
+              :view-width="28"
+              :view-height="28"
+              :sheet-width="224"
+              :sheet-height="28"
+              :offset-x="-frameIdx * 28"
+              :offset-y="0"
+            />
+          </view>
         </view>
 
-        <TrustButton :x="650" :y="455" text="重新体验 ↻" @click="gameStore.gotoChapter('intro', 0, true)" />
+        <view
+          style="font-size: 22px; line-height: 1.3; font-weight: 700; color: #4089DD"
+        >
+          《信任的进化》互动科普小程序版
+        </view>
+        <view
+          style="font-size: 14px; line-height: 1.5; color: #AAAAAA; margin-top: 6px; display: flex; flex-direction: row; align-items: center; justify-content: center"
+        >
+          <text>愿我们在每一次重复博弈中，都能选择有原则、有宽容的善意</text>
+          <image
+            src="/static/ui/love.png"
+            style="width: 16px; height: 16px; margin-left: 5px; display: block"
+            mode="aspectFit"
+          />
+        </view>
       </view>
+
+      <!-- 底部操作按钮区 (y: 448px，视觉上沿为 413px，绝不遮挡上方文字) -->
+      <TrustButton
+        :x="260"
+        :y="448"
+        text-id="label_replay"
+        @click="gameStore.gotoChapter('intro', 0, true)"
+      />
+      <TrustButton
+        :x="505"
+        :y="448"
+        text-id="label_share_friend"
+        open-type="share"
+      />
     </template>
   </StageLayout>
 </template>
 
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import StageLayout from '@/components/trust/StageLayout.vue'
+import SpriteImage from '@/components/trust/SpriteImage.vue'
 import TournamentRing from '@/components/trust/TournamentRing.vue'
 import SandboxPanel from '@/components/trust/SandboxPanel.vue'
 import SplashRing from '@/components/trust/SplashRing.vue'
 import TrustButton from '@/components/trust/TrustButton.vue'
-import { t } from '@/locales/zh-CN'
+import {
+  getShareAppMessageData,
+  getShareTimelineData,
+  t,
+} from '@/locales/zh-CN'
 import { type ChapterId, useGameStore } from '@/stores/game'
 
 defineOptions({
@@ -275,5 +345,13 @@ onLoad((query?: Record<string, string>) => {
   if (gameStore.currentChapter === 'sandbox') {
     initSandboxChapter()
   }
+})
+
+onShareAppMessage(() => {
+  return getShareAppMessageData(gameStore.currentChapter, gameStore.iteratedTotalScore)
+})
+
+onShareTimeline(() => {
+  return getShareTimelineData(gameStore.iteratedTotalScore)
 })
 </script>

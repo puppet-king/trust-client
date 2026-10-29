@@ -860,7 +860,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+import { onLoad, onShareAppMessage, onShareTimeline } from '@dcloudio/uni-app'
 import StageLayout from '@/components/trust/StageLayout.vue'
 import SpriteImage from '@/components/trust/SpriteImage.vue'
 import TournamentRing, {
@@ -873,7 +873,12 @@ import PayoffsUI from '@/components/trust/PayoffsUI.vue'
 import CharacterCard from '@/components/trust/CharacterCard.vue'
 import type { MoveType, Payoffs, StrategyId } from '@/core/pd'
 import { soundManager } from '@/core/sound'
-import { getCharacterBadgeHtml, t } from '@/locales/zh-CN'
+import {
+  getCharacterBadgeHtml,
+  getShareAppMessageData,
+  getShareTimelineData,
+  t,
+} from '@/locales/zh-CN'
 import { type ChapterId, useGameStore } from '@/stores/game'
 
 defineOptions({
@@ -1419,5 +1424,13 @@ onLoad((query?: Record<string, string>) => {
 onUnmounted(() => {
   foreverWarActive = false
   if (foreverWarTimer) clearTimeout(foreverWarTimer)
+})
+
+onShareAppMessage(() => {
+  return getShareAppMessageData(gameStore.currentChapter, gameStore.iteratedTotalScore)
+})
+
+onShareTimeline(() => {
+  return getShareTimelineData(gameStore.iteratedTotalScore)
 })
 </script>

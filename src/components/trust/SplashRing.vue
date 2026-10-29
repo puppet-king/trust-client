@@ -1,7 +1,7 @@
 <template>
   <view
-    class="absolute inset-0 pointer-events-none overflow-hidden"
-    style="position: absolute; left: 0px; top: 0px; width: 960px; height: 540px; overflow: hidden; pointer-events: none; z-index: 1"
+    class="absolute inset-0 pointer-events-none"
+    style="position: absolute; left: 0px; top: 0px; width: 960px; height: 540px; overflow: visible; pointer-events: none; z-index: 1"
   >
     <!-- 连线层 -->
     <view

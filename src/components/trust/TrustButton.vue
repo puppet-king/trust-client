@@ -98,14 +98,50 @@
           {{ t('label_' + character) }}
         </text>
       </template>
+      <template v-else-if="textId === 'outro_2_btn'">
+        <image
+          src="/static/ui/love.png"
+          style="width: 28px; height: 28px; display: block"
+          mode="aspectFit"
+        />
+      </template>
+      <template v-else-if="textId === 'label_share_friend'">
+        <text>分享给好友</text>
+        <image
+          src="/static/ui/love.png"
+          style="width: 22px; height: 22px; margin-left: 6px; display: block"
+          mode="aspectFit"
+        />
+      </template>
       <template v-else>
         <rich-text :nodes="displayHtml" />
       </template>
     </view>
 
     <!-- 触摸热区 -->
+    <button
+      v-if="active && visible && openType"
+      :open-type="openType"
+      class="absolute cursor-pointer"
+      :style="{
+        position: 'absolute',
+        left: '0px',
+        top: '0px',
+        width: hitboxWidth + 'px',
+        height: '55px',
+        opacity: 0,
+        padding: 0,
+        margin: 0,
+        border: 'none',
+        background: 'transparent',
+      }"
+      @touchstart="onTouchStart"
+      @touchend="onTouchEnd"
+      @touchcancel="onTouchCancel"
+      @tap="onTap"
+    />
     <view
-      v-if="active && visible"
+      v-else-if="active && visible"
       class="absolute cursor-pointer"
       :style="{
         position: 'absolute',
@@ -142,6 +178,7 @@ const props = withDefaults(
     active?: boolean
     visible?: boolean
     sound?: SoundName
+    openType?: 'share' | ''
   }>(),
   {
     size: 'normal',
@@ -152,6 +189,7 @@ const props = withDefaults(
     active: true,
     visible: true,
     sound: undefined,
+    openType: '',
   },
 )
 
